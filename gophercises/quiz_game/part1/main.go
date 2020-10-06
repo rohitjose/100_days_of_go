@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/csv"
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -9,10 +10,13 @@ import (
 )
 
 func main() {
+	// Read input arguments
+	csvFilePath := flag.String("file", "../problems.csv", "Questions file path")
+	flag.Parse()
 
 	// Read the csv file for the quiz problems
 	// Open the CSV file
-	problemsFile, err := os.Open("../problems.csv")
+	problemsFile, err := os.Open(*csvFilePath)
 	if err != nil {
 		log.Fatalln("Could not open the CSV file", err)
 	}

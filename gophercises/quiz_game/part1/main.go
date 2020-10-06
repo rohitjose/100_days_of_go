@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"encoding/csv"
 	"flag"
 	"fmt"
 	"io"
 	"log"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -23,6 +25,7 @@ func main() {
 
 	// Parse the file
 	r := csv.NewReader(problemsFile)
+	rans := 0
 
 	// Iterate through the records
 	for {
@@ -36,6 +39,18 @@ func main() {
 			log.Fatal(err)
 		}
 
-		fmt.Printf("Question: %s Answer: %s\n", q[0], q[1])
+		// Read Input
+		fmt.Printf("What is %s ? ", q[0])
+		reader := bufio.NewReader(os.Stdin)
+		ans, _ := reader.ReadString('\n')
+		// Trim the endline character
+		cans := strings.Trim(ans, " \n")
+
+		if cans == q[1] {
+			rans++
+		}
 	}
+
+	// Results
+	fmt.Printf("You got %d answers right!!!", rans)
 }

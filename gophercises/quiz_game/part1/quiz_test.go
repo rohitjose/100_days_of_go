@@ -8,18 +8,7 @@ import (
 func TestRunQuiz(t *testing.T) {
 	// Initialise the user input
 	var stdin bytes.Buffer
-	stdin.Write([]byte("10\n"))
-	stdin.Write([]byte("2\n"))
-	stdin.Write([]byte("11\n"))
-	stdin.Write([]byte("3\n"))
-	stdin.Write([]byte("14\n"))
-	stdin.Write([]byte("4\n"))
-	stdin.Write([]byte("5\n"))
-	stdin.Write([]byte("6\n"))
-	stdin.Write([]byte("5\n"))
-	stdin.Write([]byte("6\n"))
-	stdin.Write([]byte("6\n"))
-	stdin.Write([]byte("7\n"))
+	stdin.Write([]byte("10\n2\n11\n3\n14\n4\n5\n6\n5\n6\n6\n7\n"))
 
 	csvFilePath := "../problems.csv"
 	result := runQuiz(&stdin, csvFilePath)

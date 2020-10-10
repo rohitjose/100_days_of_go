@@ -11,6 +11,8 @@ import (
 )
 
 func runQuiz(stdin io.Reader, path string) int {
+
+	scanner := bufio.NewScanner(stdin)
 	// Read the csv file for the quiz problems
 	// Open the CSV file
 	problemsFile, err := os.Open(path)
@@ -36,8 +38,14 @@ func runQuiz(stdin io.Reader, path string) int {
 
 		// Read Input
 		fmt.Printf("What is %s ? ", q[0])
-		reader := bufio.NewReader(stdin)
-		ans, _ := reader.ReadString('\n')
+		// Read input
+		var ans string
+		if scanner.Scan() {
+			ans = scanner.Text()
+		}
+		if err := scanner.Err(); err != nil {
+			log.Fatal(err)
+		}
 		// Trim the endline character
 		cans := strings.Trim(ans, " \n")
 
